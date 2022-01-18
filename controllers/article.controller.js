@@ -20,6 +20,7 @@ exports.getAriticles = (req, res, next) => {
 exports.getAddArticle = (req, res, next) => {
   res.render("article/add-edit-article", {
     pageTitle: "Add Article",
+    editing: false,
   });
 };
 
@@ -39,6 +40,43 @@ exports.postAddArticle = async (req, res, next) => {
   const imageUrl = `images/${req.file.filename}` || "images/no-image.png";
   const likes = 0;
   const article = new Article({ title, imageUrl, body, likes });
+  await article.save();
+  res.redirect("/");
+};
+
+exports.getEditArticle = async (req, res, next) => {
+  const editMode = req.query.edit;
+  const {
+    params: { articleId },
+  } = req;
+  const article = await getById(articleId);
+
+  res.render("article/add-edit-article", {
+    pageTitle: "Edit Article",
+    editing: editMode,
+    article: article,
+  });
+};
+
+exports.postEditArticle = async (req, res, next) => {
+  const { title, body } = req.body;
+  console.log(req);
+  const {
+    params: { articleId },
+  } = req;
+  const article = await getById(articleId);
+
+  article.title = title;
+  article.body = body;
+
+  // if (req.file) {
+  //   const imageUrl = `images/${req.file.filename}`;
+  //   fs.unlink(req.file.path, (err) => {
+  //     if (err) console.log(err);
+  //     console.log("Inception");
+  //   });
+  //   article.imageUrl = imageUrl;
+  // }
   await article.save();
   res.redirect("/");
 };

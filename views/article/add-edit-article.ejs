@@ -2,7 +2,11 @@
 <body class="bg-white dark:bg-gray-900">
   <%- include('../includes/nav.ejs') %>
   <main class="p-5">
-    <form action="/add-article" method="post" enctype="multipart/form-data">
+    <form
+      action="<% if(editing) { %>/edit-article<% }else{ %>/add-article<% } %>"
+      method="post"
+      enctype="multipart/form-data"
+    >
       <div class="mb-6">
         <label
           for="title"
@@ -13,14 +17,17 @@
           type="text"
           id="title"
           name="title"
+          value="<% if(editing) { %><%= article.title %><% } %>"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
         />
       </div>
+      <% if(editing === false) { %>
       <div class="mb-6">
         <label
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           for="image"
+          value="<% if(editing) { %><%= article.imageUrl %><% } %>"
           >Upload file</label
         >
         <input
@@ -31,6 +38,7 @@
           name="image"
         />
       </div>
+      <% } %>
       <div class="mb-6">
         <label
           for="body"
@@ -42,14 +50,19 @@
           name="body"
           rows="10"
           class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        ></textarea>
+        >
+<% if(editing) { %><%= article.body %><% } %></textarea
+        >
       </div>
+      <% if(editing) { %>
+      <input type="hidden" value="<%= article._id %>" name="articleId" />
+      <% } %>
 
       <button
         type="submit"
         class="text-white bg-emerald-400 hover:bg-emerald-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-emerald-400 dark:hover:bg-emerald-500 dark:focus:ring-blue-800"
       >
-        Submit
+        <% if(editing) { %>Edit<% }else{ %>Add<% } %> Article
       </button>
     </form>
   </main>
