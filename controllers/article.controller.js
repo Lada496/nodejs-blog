@@ -1,5 +1,10 @@
 const Article = require("../models/article.model");
-
+const getById = (articleId) => {
+  return Article.findById(articleId, (err, data) => {
+    if (err) console.log(err);
+    return data;
+  }).clone();
+};
 exports.getAriticles = (req, res, next) => {
   Article.find((err, data) => {
     if (err) console.log(err);
@@ -13,8 +18,19 @@ exports.getAriticles = (req, res, next) => {
   });
 };
 exports.getAddArticle = (req, res, next) => {
-  res.render("article/add-article", {
+  res.render("article/add-edit-article", {
     pageTitle: "Add Article",
+  });
+};
+
+exports.getArticleById = async (req, res, next) => {
+  const {
+    params: { articleId },
+  } = req;
+  const article = await getById(articleId);
+  res.render("article/article-detail", {
+    pageTitle: article.title,
+    article: article,
   });
 };
 

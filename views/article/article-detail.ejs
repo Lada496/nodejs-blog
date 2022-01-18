@@ -1,0 +1,42 @@
+<%- include('../includes/head.ejs') %>
+<body class="bg-white dark:bg-gray-900">
+  <%- include('../includes/nav.ejs') %>
+  <main class="p-5 py-5 lg:px-48 md:px-28">
+    <h1
+      class="mb-2 text-2xl font-bold capitalize tracking-tight text-gray-900 dark:text-white"
+    >
+      <%= article.title %>
+    </h1>
+    <div class="flex items-center">
+      <svg
+        class="w-6 h-6 stroke-slate-500 hover:fill-red-400 hover:stroke-red-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+        ></path>
+      </svg>
+      <span class="mt-2 mb-2 text-slate-500 dark:text-slate-400">
+        <%= article.likes %>
+      </span>
+    </div>
+    <div class="mx-auto w-full lg:w-8/12">
+      <img
+        class="w-full object-cover rounded"
+        src="/<%= article.imageUrl %>"
+        alt="<%= article.title %>"
+      />
+    </div>
+
+    <p class="mt-2 mb-2 p-6 text-slate-500 dark:text-slate-400">
+      <%= article.body %>
+    </p>
+  </main>
+  <%- include('../includes/end.ejs') %>
+</body>

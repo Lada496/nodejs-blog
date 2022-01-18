@@ -8,6 +8,8 @@ router.get("/", articleController.getAriticles);
 
 router.get("/add-article", articleController.getAddArticle);
 
+router.get("/articles/:articleId", articleController.getArticleById);
+
 router.post(
   "/add-article",
   upload.single("image"),
