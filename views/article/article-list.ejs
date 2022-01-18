@@ -1,8 +1,60 @@
 <%- include('../includes/head.ejs') %>
-<body class="bg-white dark:bg-gray-800">
+<body class="bg-white dark:bg-gray-900">
   <%- include('../includes/nav.ejs') %>
-  <main>
-    <h1>Home</h1>
+  <main class="p-5">
+    <% if(articles.length >0) { %> <% for(let article of articles) { %>
+    <div
+      class="max-w-md mx-auto bg-white mb-3 rounded-xl shadow-md overflow-hidden md:max-w-2xl dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div class="md:flex">
+        <div class="md:shrink-0">
+          <img
+            class="h-48 w-full object-cover md:h-full md:w-48"
+            src="<%= article.imageUrl %>"
+            alt="<%= article.title%>"
+          />
+        </div>
+        <div class="p-8">
+          <h5
+            class="mb-2 text-2xl font-bold capitalize tracking-tight text-gray-900 dark:text-white"
+          >
+            <% if(article.title.length >= 25) { %> <%= article.title.slice(0,
+            25).concat('...') %> <% }else{ %> <%= article.title %> <% } %>
+          </h5>
+          <p class="mt-2 mb-2 text-slate-500 dark:text-slate-400">
+            <% if(article.body.length >= 200) { %> <%= article.body.slice(0,
+            200).concat('...') %> <% }else{ %> <%= article.body %><span
+              class="text-transparent"
+            >
+              <%= lorem.slice(0, 200 - article.body.length) %>
+            </span>
+            <% } %>
+          </p>
+          <a
+            href="#"
+            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-emerald-400 rounded-lg hover:bg-emerald-500 focus:ring-4 focus:ring-blue-300 dark:bg-emerald-400 dark:hover:bg-emerald-500 dark:focus:ring-blue-800"
+          >
+            Read more
+            <svg
+              class="ml-2 -mr-1 w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <% } %> <% }else{ %>
+    <h1>No Articles Found!</h1>
+    <% } %>
   </main>
 
   <%- include('../includes/end.ejs') %>
+</body>
