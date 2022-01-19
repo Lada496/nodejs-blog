@@ -54,14 +54,14 @@
         >
       </div>
       <% if(editing) { %>
-        <input type="hidden" value="<%= article._id %>" name="articleId" />
-    <% } %>
+      <input type="hidden" value="<%= article._id %>" name="articleId" />
+      <% } %>
 
       <button
         type="submit"
         class="text-white bg-emerald-400 hover:bg-emerald-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-emerald-400 dark:hover:bg-emerald-500 dark:focus:ring-blue-800"
       >
-        <% if(editing) { %>Edit<% }else{ %>Add<% } %> Article
+        <% if(editing) { %>Submit Change<% }else{ %>Add Article<% } %>
       </button>
     </form>
   </main>
