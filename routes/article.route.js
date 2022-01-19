@@ -20,6 +20,10 @@ router.post(
 
 router.post("/edit-article", articleController.postEditArticle);
 
+router.post("/edit-like", articleController.postAddLikes);
+
+router.post("/edit-dislike", articleController.postAddDislikes);
+
 router.post("/delete-article", articleController.deleteArticle);
 
 module.exports = router;

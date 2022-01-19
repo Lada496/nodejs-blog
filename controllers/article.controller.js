@@ -39,7 +39,8 @@ exports.postAddArticle = async (req, res, next) => {
   const { title, body } = req.body;
   const imageUrl = `images/${req.file.filename}` || "images/no-image.png";
   const likes = 0;
-  const article = new Article({ title, imageUrl, body, likes });
+  const dislikes = 0;
+  const article = new Article({ title, imageUrl, body, likes, dislikes });
   await article.save();
   res.redirect("/");
 };
@@ -65,7 +66,6 @@ exports.postEditArticle = async (req, res, next) => {
   //   params: { articleId },
   // } = req;
   const article = await getById(articleId);
-  console.log(article);
 
   article.title = title;
   article.body = body;
@@ -86,4 +86,20 @@ exports.deleteArticle = async (req, res, next) => {
   const { articleId } = req.body;
   await Article.findByIdAndDelete(articleId);
   res.redirect("/");
+};
+
+exports.postAddLikes = async (req, res, next) => {
+  const { articleId, likes } = req.body;
+  const article = await getById(articleId);
+  article.likes = +likes + 1;
+  await article.save();
+  res.redirect(`/articles/${articleId}`);
+};
+
+exports.postAddDislikes = async (req, res, next) => {
+  const { articleId, dislikes } = req.body;
+  const article = await getById(articleId);
+  article.dislikes = +dislikes + 1;
+  await article.save();
+  res.redirect(`/articles/${articleId}`);
 };
