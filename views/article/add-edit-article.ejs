@@ -5,7 +5,7 @@
     <form
       action="<% if(editing) { %>/edit-article<% }else{ %>/add-article<% } %>"
       method="post"
-      enctype="multipart/form-data"
+      enctype="<% if(editing) { %>application/x-www-form-urlencoded<% }else{ %>multipart/form-data<% } %>"
     >
       <div class="mb-6">
         <label
@@ -27,7 +27,6 @@
         <label
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           for="image"
-          value="<% if(editing) { %><%= article.imageUrl %><% } %>"
           >Upload file</label
         >
         <input
@@ -55,8 +54,8 @@
         >
       </div>
       <% if(editing) { %>
-      <input type="hidden" value="<%= article._id %>" name="articleId" />
-      <% } %>
+        <input type="hidden" value="<%= article._id %>" name="articleId" />
+    <% } %>
 
       <button
         type="submit"

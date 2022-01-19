@@ -59,12 +59,13 @@ exports.getEditArticle = async (req, res, next) => {
 };
 
 exports.postEditArticle = async (req, res, next) => {
-  const { title, body } = req.body;
-  console.log(req);
-  const {
-    params: { articleId },
-  } = req;
+  const { title, body, articleId } = req.body;
+  console.log(req.body);
+  // const {
+  //   params: { articleId },
+  // } = req;
   const article = await getById(articleId);
+  console.log(article);
 
   article.title = title;
   article.body = body;
@@ -78,5 +79,11 @@ exports.postEditArticle = async (req, res, next) => {
   //   article.imageUrl = imageUrl;
   // }
   await article.save();
+  res.redirect("/");
+};
+
+exports.deleteArticle = async (req, res, next) => {
+  const { articleId } = req.body;
+  await Article.findByIdAndDelete(articleId);
   res.redirect("/");
 };

@@ -12,11 +12,14 @@ router.get("/articles/:articleId", articleController.getArticleById);
 
 router.get("/edit-article/:articleId", articleController.getEditArticle);
 
-router.post("/edit-article", articleController.postEditArticle);
 router.post(
   "/add-article",
   upload.single("image"),
   articleController.postAddArticle
 );
+
+router.post("/edit-article", articleController.postEditArticle);
+
+router.post("/delete-article", articleController.deleteArticle);
 
 module.exports = router;

@@ -2,13 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const articleRoute = require("./routes/article.route");
 const authRoute = require("./routes/auth.route");
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
