@@ -103,3 +103,15 @@ exports.postAddDislikes = async (req, res, next) => {
   await article.save();
   res.redirect(`/articles/${articleId}`);
 };
+
+exports.postAddComment = async (req, res, next) => {
+  const { articleId, comment, name } = req.body;
+  const article = await getById(articleId);
+
+  article.comments.push({
+    comment,
+    name,
+  });
+  await article.save();
+  res.redirect(`/articles/${articleId}`);
+};

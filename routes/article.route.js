@@ -26,4 +26,6 @@ router.post("/edit-dislike", articleController.postAddDislikes);
 
 router.post("/delete-article", articleController.deleteArticle);
 
+router.post("/add-comments", articleController.postAddComment);
+
 module.exports = router;

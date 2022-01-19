@@ -22,24 +22,18 @@ const articleSchema = new Schema({
     type: Number,
     required: true,
   },
-  comments: {
-    comments: [
-      {
-        name: {
-          type: String,
-          require: true,
-        },
-
-        comment: {
-          type: String,
-          require: true,
-        },
-        date: {
-          type: String,
-          require: true,
-        },
+  comments: [
+    {
+      name: {
+        type: String,
+        require: true,
       },
-    ],
-  },
+
+      comment: {
+        type: String,
+        require: true,
+      },
+    },
+  ],
 });
 module.exports = mongoose.model("Article", articleSchema);

@@ -46,7 +46,74 @@
     <p class="mt-2 mb-2 p-6 text-slate-500 dark:text-slate-400">
       <%= article.body %>
     </p>
-    <div class="flex gap-2">
+    <div class="mt-5 p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+        <h1
+      class="mb-2 text-2xl font-bold capitalize tracking-tight text-gray-900 dark:text-white"
+    >
+      Comments
+    </h1>
+        <% if(article.comments.length > 0) { %>
+            
+            <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
+            <% for(let comment of article.comments) { %>
+                <li class="items-center block p-3 flex-col gap-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <div class="text-sm font-normal"><%= comment.comment %></div>
+                    <span class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">    
+                        by <%= comment.name %>
+                    </span>
+
+                </li>
+                <% } %>
+            </ol>
+            <% } else { %>
+                <h1 class="text-gray-900 dark:text-white">No Comments Added Yet!</h1>
+                <% } %>
+
+                <form class="mt-5 p-5 rounded-lg bg-gray-100 dark:bg-gray-700 dark:border-gray-600"
+                action="/add-comments"
+                method="post"
+                
+              >
+                <div class="mb-6">
+                  <label
+                    for="name"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >Name</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                  />
+                </div>
+                
+                <div class="mb-6">
+                  <label
+                    for="comment"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+                    >Comment</label
+                  >
+                  <textarea
+                    id="comment"
+                    name="comment"
+                    rows="4"
+                    class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  ></textarea
+                  >
+                </div>
+                  <input type="hidden" value="<%= article._id %>" name="articleId" />
+          
+                <button
+                  type="submit"
+                  class="text-white bg-emerald-400 hover:bg-emerald-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-emerald-400 dark:hover:bg-emerald-500 dark:focus:ring-blue-800"
+                >
+                  Add New Comment
+                </button>
+              </form>            
+    </div>
+    <div class="flex gap-2 mt-5">
         <a
       href="/edit-article/<%= article.id%>?edit=true"
       class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-emerald-400 rounded-lg hover:bg-emerald-500 focus:ring-4 focus:ring-blue-300 dark:bg-emerald-400 dark:hover:bg-emerald-500 dark:focus:ring-blue-800"
@@ -75,6 +142,8 @@
         <!-- <button class="card-footer-item" type="submit">Delete</button> -->
     </form>
     </div>
+
+    
     
     
   </main>
