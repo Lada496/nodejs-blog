@@ -9,8 +9,12 @@ if (
     window.matchMedia("(prefers-color-scheme: dark)").matches)
 ) {
   themeToggleLightIcon.classList.remove("hidden");
+  document.documentElement.classList.add("dark");
+  localStorage.setItem("color-theme", "dark");
 } else {
   themeToggleDarkIcon.classList.remove("hidden");
+  document.documentElement.classList.remove("dark");
+  localStorage.setItem("color-theme", "light");
 }
 
 const themeToggleBtn = document.getElementById("theme-toggle");
