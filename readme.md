@@ -24,6 +24,10 @@ A CRUD application for a blog with the following features.
 - Dark Mode
 <img width="1432" alt="Screen Shot 2022-01-18 at 23 12 59" src="https://user-images.githubusercontent.com/67321065/150084524-717d4b69-b767-45e5-8e9e-a7c402f1b9d8.png">
 
+- Mobile
+<img width="373" alt="Screen Shot 2022-01-20 at 10 11 55" src="https://user-images.githubusercontent.com/67321065/150397146-23b024e7-99c9-48b0-ba18-e8e428eaf93c.png">
+
+
 ## Stack
 
 - Node.js
